@@ -1,0 +1,6 @@
+import '../blogs/blog.css';
+import { BlogToaster } from '@/components/blogs/blog-toaster';
+
+export default function ProductsLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}<BlogToaster /></>;
+}

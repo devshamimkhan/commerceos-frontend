@@ -1,0 +1,2 @@
+import { ProductEditor } from '@/components/products/product-module'; import { getCatalogServer } from '@/lib/catalog-server';
+export default async function Page(){const [categories,tags,brands,attributes]=await Promise.all([getCatalogServer('categories'),getCatalogServer('tags'),getCatalogServer('brands'),getCatalogServer('attributes')]);return <ProductEditor type="variable" catalogs={{categories:categories.success?categories.data:[],tags:tags.success?tags.data:[],brands:brands.success?brands.data:[],attributes:attributes.success?attributes.data:[]}}/>}

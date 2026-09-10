@@ -1,0 +1,1 @@
+export default function Loading() { return <div className="product-loading"><div className="skeleton product-load-create"/><div className="product-stats-grid">{[1,2,3,4].map(x=><div className="skeleton product-load-stat" key={x}/>)}</div><div className="skeleton product-load-panel"/></div>; }
