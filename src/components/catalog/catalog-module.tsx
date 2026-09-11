@@ -372,12 +372,12 @@ function CategoryTreeList({ initialRows = null, initialError = "" }) {
   });
 
   return (
-    <div className="catalog-module blog-workspace">
-      <div className="flex justify-between items-center mb-8 gap-4">
+    <div className="catalog-module blog-workspace -mx-2 -mt-1 w-[calc(100%+16px)] max-w-none max-sm:mx-0 max-sm:mt-0 max-sm:w-full">
+      <div className="mb-5 flex items-center justify-between gap-5">
         <p className="text-gray-700 font-bold">Organize your products with categories and subcategories</p>
         <Link href="/admin/categories/create" onClick={() => rememberCatalogList("categories")} className="bg-rose-gold hover:bg-pink-600 text-white px-4 py-2 rounded-xl font-medium flex items-center shrink-0"><FaPlus className="mr-2" /> Add New Category</Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-3">
         {[["Total Categories", stats.total, <FaTags key="total" /> , "bg-gradient-pink"], ["Published Categories", stats.published, <FaCheckCircle key="published" />, "bg-purple-500"], ["Featured Categories", stats.featured, <FaStar key="featured" />, "bg-blue-500"]].map(([label, value, icon, color]) => (
           <div key={String(label)} className="glassmorphism p-6 rounded-2xl shadow-md"><div className="flex justify-between items-start"><div><p className="text-gray-400 text-sm">{label}</p><h3 className="text-2xl font-bold text-white mt-2">{value}</h3></div><span className={`${color} p-3 rounded-xl text-white text-xl`}>{icon}</span></div></div>
         ))}

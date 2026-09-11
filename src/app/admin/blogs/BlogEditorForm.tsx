@@ -35,6 +35,7 @@ import {
   updateBlogTag,
 } from "@/lib/blogs-client";
 import MediaPickerModal from "@/components/media/media-picker";
+import { clearBlogListReturn, consumeBlogListReturn } from "@/lib/blog-navigation";
 import "react-quill-new/dist/quill.snow.css";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
@@ -408,6 +409,7 @@ export default function BlogEditorForm({ mode = "create", initialBlog = null }) 
     }
 
     toast.success(isEdit ? "Blog updated successfully" : "Blog created successfully");
+    clearBlogListReturn();
     router.push("/admin/blogs");
     router.refresh();
   };
@@ -423,13 +425,7 @@ export default function BlogEditorForm({ mode = "create", initialBlog = null }) 
         </div>
         <button
           type="button"
-          onClick={() => {
-            if (window.history.length > 1) {
-              router.back();
-              return;
-            }
-            router.push("/admin/blogs");
-          }}
+          onClick={() => { if (consumeBlogListReturn()) router.back(); else router.push("/admin/blogs"); }}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-white border border-gray-700"
         >
           <FaArrowLeft />
@@ -830,11 +826,8 @@ export default function BlogEditorForm({ mode = "create", initialBlog = null }) 
                   <option value="published">Published</option>
                 </select>
               </label>
-              <button type="button" disabled={isSaving} onClick={() => handleSubmit("draft")} className="blog-publish-draft">
-                {isSaving ? <><FaSpinner className="animate-spin" /> Saving</> : <><FaSave /> Save Draft</>}
-              </button>
-              <button type="button" disabled={isSaving} onClick={() => handleSubmit("published")} className="blog-publish-submit">
-                {isSaving ? <><FaSpinner className="animate-spin" /> Publishing</> : <><FaCheck /> Publish</>}
+              <button type="button" disabled={isSaving} onClick={() => handleSubmit(form.status)} className="blog-publish-submit">
+                {isSaving ? <><FaSpinner className="animate-spin" /> Saving</> : <><FaSave /> {isEdit ? "Save Changes" : "Create Blog"}</>}
               </button>
             </div>
           </section>

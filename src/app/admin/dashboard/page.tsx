@@ -38,7 +38,6 @@ export default function Dashboard() {
       <section className="dashboard-heading">
         <div>
           <p className="admin-eyebrow">Store overview</p>
-          <h2>Business at a glance</h2>
           <p>Monitor sales, orders, customers, and inventory from one place.</p>
         </div>
         <Link href="/admin/orders" className="admin-primary-action">

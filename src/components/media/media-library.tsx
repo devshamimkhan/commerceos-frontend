@@ -295,7 +295,7 @@ export default function MediaLibraryClient() {
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+            <div className="media-upload-icon h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
               <Icon className="fas fa-folder-open"></Icon>
             </div>
             <div>
@@ -440,7 +440,7 @@ export default function MediaLibraryClient() {
                     onClick={() => openDetails(item)}
                   >
                     <MediaPreview item={item} />
-                    <span className="absolute right-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-blue-600">
+                    <span className="media-type-badge absolute right-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-blue-600">
                       {item.mediaType.toUpperCase()}
                     </span>
                   </button>
