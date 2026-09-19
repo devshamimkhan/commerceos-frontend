@@ -6,6 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "CommerceXLab | Admin Workspace",
   description: "Unified online, retail and wholesale commerce workspace.",
+  icons: { icon: "/branding/commercexlab-icon.png" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
