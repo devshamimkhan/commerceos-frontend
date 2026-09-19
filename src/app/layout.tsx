@@ -4,7 +4,7 @@ import '@fontsource-variable/noto-sans-bengali';
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CommerceOS | Sports Commerce",
+  title: "CommerceXLab | Admin Workspace",
   description: "Unified online, retail and wholesale commerce workspace.",
 };
 

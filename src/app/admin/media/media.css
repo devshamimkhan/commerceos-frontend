@@ -268,66 +268,66 @@
 .admin-container .media-library input[type="radio"] { accent-color:#7c3aed; }
 
 /* Keep the media library crisp and readable against the light admin canvas. */
-.admin-container:not(.is-dark) .media-library .media-upload-icon {
+.admin-container .media-library .media-upload-icon {
   background: #ede9fe !important;
   color: #6d28d9 !important;
   border: 1px solid #ddd6fe;
 }
 
-.admin-container:not(.is-dark) .media-library .btn-primary:hover {
+.admin-container .media-library .btn-primary:hover {
   background: linear-gradient(90deg, #6d28d9, #4338ca);
   color: #ffffff;
 }
 
-.admin-container:not(.is-dark) .media-library .media-type-badge {
+.admin-container .media-library .media-type-badge {
   background: #6d28d9 !important;
   color: #ffffff !important;
   border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: 0 2px 8px rgba(76, 29, 149, 0.22);
 }
 
-.admin-container:not(.is-dark) .media-library .data-table th {
+.admin-container .media-library .data-table th {
   background: #ede9fe;
   color: #312e81;
   border-bottom-color: #ddd6fe;
 }
 
-.admin-container:not(.is-dark) .media-library .data-table td {
+.admin-container .media-library .data-table td {
   color: #334155;
   border-bottom-color: #e2e8f0;
 }
 
-.admin-container:not(.is-dark) .media-library .data-table tbody tr:hover td {
+.admin-container .media-library .data-table tbody tr:hover td {
   background: #faf9ff;
 }
 
-.admin-container:not(.is-dark) .media-library .action-view,
-.admin-container:not(.is-dark) .media-library .action-edit {
+.admin-container .media-library .action-view,
+.admin-container .media-library .action-edit {
   background: #ede9fe;
   color: #5b21b6;
   border-color: #ddd6fe;
 }
 
-.admin-container:not(.is-dark) .media-library .action-view:hover,
-.admin-container:not(.is-dark) .media-library .action-edit:hover {
+.admin-container .media-library .action-view:hover,
+.admin-container .media-library .action-edit:hover {
   background: #ddd6fe;
   color: #4c1d95;
 }
 
-.admin-container:not(.is-dark) .media-library .action-delete {
+.admin-container .media-library .action-delete {
   background: #fee2e2;
   color: #dc2626;
   border-color: #fecaca;
 }
 
-.admin-container:not(.is-dark) .media-library .action-delete:hover {
+.admin-container .media-library .action-delete:hover {
   background: #fecaca;
   color: #b91c1c;
 }
 
-.admin-container:not(.is-dark) .media-library .action-btn:disabled,
-.admin-container:not(.is-dark) .media-library .btn-outline:disabled,
-.admin-container:not(.is-dark) .media-library .btn-primary:disabled {
+.admin-container .media-library .action-btn:disabled,
+.admin-container .media-library .btn-outline:disabled,
+.admin-container .media-library .btn-primary:disabled {
   background: #f1f5f9 !important;
   color: #94a3b8 !important;
   border-color: #e2e8f0 !important;
@@ -335,7 +335,56 @@
   cursor: not-allowed;
 }
 
-.admin-container:not(.is-dark) .media-library .badge-upcoming {
+.admin-container .media-library .badge-upcoming {
   background: #4f46e5;
   color: #ffffff;
 }
+
+/* Theme Settings overrides for the legacy media module. */
+.admin-container .media-library .btn-primary,
+.admin-container .media-library .btn-primary {
+  border-radius: var(--admin-button-radius) !important;
+  background: var(--admin-button-primary-bg) !important;
+  color: var(--admin-button-primary-text) !important;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--admin-button-primary-bg) 22%, transparent) !important;
+}
+.admin-container .media-library .btn-primary:hover,
+.admin-container .media-library .btn-primary:hover { background: var(--admin-button-primary-hover) !important; }
+.admin-container .media-library .btn-outline,
+.admin-container .media-library .action-view,
+.admin-container .media-library .action-edit,
+.admin-container .media-library .action-view,
+.admin-container .media-library .action-edit {
+  border-color: color-mix(in srgb, var(--admin-button-secondary-text) 24%, transparent) !important;
+  border-radius: var(--admin-button-radius) !important;
+  background: var(--admin-button-secondary-bg) !important;
+  color: var(--admin-button-secondary-text) !important;
+}
+.admin-container .media-library .btn-outline:hover,
+.admin-container .media-library .action-view:hover,
+.admin-container .media-library .action-edit:hover,
+.admin-container .media-library .action-view:hover,
+.admin-container .media-library .action-edit:hover { background: var(--admin-button-secondary-hover) !important; color: var(--admin-button-secondary-text) !important; }
+.admin-container .media-library .action-delete,
+.admin-container .media-library .action-delete {
+  border-color: var(--admin-button-danger-bg) !important;
+  border-radius: var(--admin-button-radius) !important;
+  background: var(--admin-button-danger-bg) !important;
+  color: var(--admin-button-danger-text) !important;
+}
+.admin-container .media-library .action-delete:hover,
+.admin-container .media-library .action-delete:hover { background: var(--admin-button-danger-hover) !important; color: var(--admin-button-danger-text) !important; }
+.admin-container .media-library .media-upload-icon {
+  border-color: color-mix(in srgb, var(--admin-primary) 25%, transparent) !important;
+  background: color-mix(in srgb, var(--admin-primary) 12%, var(--admin-surface-color)) !important;
+  color: var(--admin-primary) !important;
+}
+.admin-container .media-library .media-type-badge,
+.admin-container .media-library .badge-upcoming,
+.admin-container .media-library .badge-upcoming,
+.admin-container .media-library [class~="rounded-full"][class*="text-blue-600"] { background: var(--admin-accent) !important; color: #ffffff !important; }
+.admin-container .media-library .data-table th { background: color-mix(in srgb, var(--admin-primary) 10%, var(--admin-surface-color)) !important; color: var(--admin-heading) !important; border-bottom-color: var(--admin-border) !important; }
+.admin-container .media-library .data-table td { color: var(--admin-text) !important; border-bottom-color: var(--admin-border) !important; }
+.admin-container .media-library .data-table tbody tr:hover td { background: color-mix(in srgb, var(--admin-primary) 5%, var(--admin-surface-color)) !important; }
+.admin-container .media-library .modal-box { background: var(--admin-surface) !important; color: var(--admin-text) !important; }
+.admin-container .media-library :is(input[type="checkbox"], input[type="radio"]) { accent-color: var(--admin-primary) !important; }

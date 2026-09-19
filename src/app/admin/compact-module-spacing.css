@@ -1,0 +1,98 @@
+/* Shared compact rhythm for management pages: no page-level spacing exceeds 20px. */
+.admin-container .admin-content:has(> :is(.hero-slider-management, .benefits-management, .reviews-admin)) {
+  padding: 0;
+}
+
+.admin-container :is(.hero-slider-management, .benefits-management, .reviews-admin) {
+  padding: 20px;
+}
+
+.admin-container :is(.hero-slider-page-heading, .benefits-heading) {
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.admin-container .hero-slider-list-panel {
+  padding: 20px;
+}
+
+.admin-container .hero-slider-list-panel > h2 {
+  margin-bottom: 20px;
+}
+
+.admin-container .hero-slider-hint {
+  margin-top: 20px;
+}
+
+.admin-container .hero-slider-empty {
+  padding: 20px;
+}
+
+.admin-container .hero-slider-editor {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.admin-container .hero-slider-editor-heading {
+  margin-bottom: 20px;
+}
+
+.admin-container .hero-slider-form-grid {
+  gap: 20px;
+}
+
+.admin-container .benefits-editor {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.admin-container .benefits-form-grid {
+  gap: 20px;
+}
+
+.admin-container .benefits-editor .benefits-checkbox {
+  margin-block: 20px;
+}
+
+.admin-container .benefits-management + .benefits-management {
+  padding-top: 0;
+}
+
+.admin-container .policy-editor .benefits-heading {
+  margin-bottom: 20px;
+}
+
+.admin-container .reviews-admin > header p {
+  margin-bottom: 20px;
+}
+
+.admin-container .admin-review-modal > section {
+  padding: 20px;
+}
+
+.admin-container .review-actions button:not(.delete) {
+  display: inline-flex;
+  width: auto;
+  gap: 6px;
+  padding-inline: 10px;
+  white-space: nowrap;
+}
+
+.admin-container .review-product a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.admin-container .review-product a:hover {
+  color: #7c3aed;
+}
+
+@media (max-width: 1000px) {
+  .admin-container :is(.hero-slider-management, .benefits-management, .reviews-admin) {
+    padding: 18px;
+  }
+
+  .admin-container .benefits-management + .benefits-management {
+    padding-top: 0;
+  }
+}

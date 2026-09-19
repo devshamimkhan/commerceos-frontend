@@ -20,6 +20,7 @@ import {
   FaImage,
   FaList,
   FaPlus,
+  FaRegStar,
   FaSave,
   FaSearch,
   FaSpinner,
@@ -31,6 +32,7 @@ import {
 } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import {
+  bulkDeleteCatalogItems,
   createCatalogItem,
   deleteCatalogItem,
   getCatalog,
@@ -267,19 +269,19 @@ function CategoryTreeList({ initialRows = null, initialError = "" }) {
     setBusyId("");
   };
 
-  const toggleStatus = async (category) => {
+  const toggleFeatured = async (category) => {
     setBusyId(category._id);
-    const nextStatus = category.status === "published" ? "draft" : "published";
+    const nextFeatured = !category.isFeatured;
     const result = await updateCatalogItem("categories", category._id, {
       ...category,
       children: undefined,
       parentId: category.parentId || null,
-      status: nextStatus,
+      isFeatured: nextFeatured,
     });
     if (result.success) {
       setRows((current) => current.map((row) => row._id === category._id ? result.data : row));
-      toast.success(`Category ${nextStatus === "published" ? "published" : "moved to draft"}`);
-    } else toast.error(result.error || "Failed to update category status");
+      toast.success(`Category ${nextFeatured ? "marked as featured" : "removed from featured"}`);
+    } else toast.error(result.error || "Failed to update featured category");
     setBusyId("");
   };
 
@@ -355,9 +357,20 @@ function CategoryTreeList({ initialRows = null, initialError = "" }) {
               <span className={`category-status-badge text-xs px-3 py-1 rounded-full ${category.status === "published" ? "category-status-published" : "category-status-draft"}`}>
                 {category.status === "published" ? "Published" : "Draft"}
               </span>
-              {category.isFeatured && <span className="category-featured-badge text-xs px-3 py-1 rounded-full">Featured</span>}
-              <button type="button" disabled={busyId === category._id} onClick={() => toggleStatus(category)} className="category-toggle-action text-xs px-3 py-1 rounded-full disabled:opacity-50">
-                {busyId === category._id ? "..." : "Toggle"}
+              <button
+                type="button"
+                aria-pressed={Boolean(category.isFeatured)}
+                aria-label={`${category.isFeatured ? "Remove" : "Add"} ${category.name} ${category.isFeatured ? "from" : "to"} featured categories`}
+                title="Featured category"
+                disabled={Boolean(busyId)}
+                onClick={() => toggleFeatured(category)}
+                className={`inline-grid size-9 place-items-center border-0 !bg-transparent text-xl transition hover:scale-110 disabled:cursor-wait disabled:opacity-60 ${category.isFeatured ? "text-amber-400" : "text-gray-400 hover:text-amber-400"}`}
+              >
+                {busyId === category._id
+                  ? <FaSpinner aria-hidden="true" className="animate-spin" />
+                  : category.isFeatured
+                    ? <FaStar aria-hidden="true" />
+                    : <FaRegStar aria-hidden="true" />}
               </button>
               <Link href={`/admin/categories/edit/${category._id}`} onClick={() => rememberCatalogList("categories")} className="text-rose-gold hover:text-pink-600 p-2" aria-label={`Edit ${category.name}`}><FaEdit /></Link>
               <button type="button" disabled={busyId === category._id} onClick={() => setDeleteTarget(category)} className="text-red-400 hover:text-red-300 p-2 disabled:opacity-50" aria-label={`Delete ${category.name}`}>
@@ -379,7 +392,7 @@ function CategoryTreeList({ initialRows = null, initialError = "" }) {
       </div>
       <div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-3">
         {[["Total Categories", stats.total, <FaTags key="total" /> , "bg-gradient-pink"], ["Published Categories", stats.published, <FaCheckCircle key="published" />, "bg-purple-500"], ["Featured Categories", stats.featured, <FaStar key="featured" />, "bg-blue-500"]].map(([label, value, icon, color]) => (
-          <div key={String(label)} className="glassmorphism p-6 rounded-2xl shadow-md"><div className="flex justify-between items-start"><div><p className="text-gray-400 text-sm">{label}</p><h3 className="text-2xl font-bold text-white mt-2">{value}</h3></div><span className={`${color} p-3 rounded-xl text-white text-xl`}>{icon}</span></div></div>
+          <div key={String(label)} className="glassmorphism p-6 rounded-2xl shadow-md"><div className="flex justify-between items-start"><div><p className="text-gray-400 text-sm">{label}</p><h3 className="text-2xl font-bold text-white mt-2">{value}</h3></div><span className={`catalog-stat-icon ${color} p-3 rounded-xl text-xl`}>{icon}</span></div></div>
         ))}
       </div>
       <div className="glassmorphism p-6 rounded-2xl shadow-md">
@@ -422,6 +435,7 @@ function AttributeList({ initialRows = null, initialError = "" }) {
   const [page, setPage] = useState(1);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [deleting, setDeleting] = useState(false);
+  const [filterToggleId, setFilterToggleId] = useState("");
   const pageSize = 10;
 
   const load = useCallback(async () => {
@@ -463,6 +477,18 @@ function AttributeList({ initialRows = null, initialError = "" }) {
     setDeleting(false);
   };
 
+  const toggleFilterVisibility = async (attribute) => {
+    if (filterToggleId) return;
+    setFilterToggleId(attribute._id);
+    const showInFilters = attribute.showInFilters === false;
+    const result = await updateCatalogItem("attributes", attribute._id, { ...attribute, showInFilters, parentId: null });
+    if (result.success) {
+      setRows((current) => current.map((row) => row._id === attribute._id ? result.data : row));
+      toast.success(`${attribute.name} ${showInFilters ? "will show" : "will not show"} in storefront filters`);
+    } else toast.error(result.error || "Failed to update filter visibility");
+    setFilterToggleId("");
+  };
+
   return (
     <div className="catalog-module blog-workspace">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
@@ -474,7 +500,7 @@ function AttributeList({ initialRows = null, initialError = "" }) {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {[["Total Attributes", rows.length, <FaList key="attributes" />, "bg-gradient-pink"], ["Total Terms", totalTerms, <FaTags key="terms" />, "bg-purple-500"], ["Average Terms", rows.length ? Math.round(totalTerms / rows.length) : 0, <FaList key="average" />, "bg-blue-500"]].map(([label, value, icon, color]) => (
-          <div key={String(label)} className="glassmorphism p-6 rounded-2xl shadow-md"><div className="flex justify-between items-start"><div><p className="text-gray-400 text-sm">{label}</p><h3 className="text-2xl font-bold text-white mt-2">{loading ? "..." : value}</h3></div><span className={`${color} p-3 rounded-xl text-white text-xl`}>{icon}</span></div></div>
+          <div key={String(label)} className="glassmorphism p-6 rounded-2xl shadow-md"><div className="flex justify-between items-start"><div><p className="text-gray-400 text-sm">{label}</p><h3 className="text-2xl font-bold text-white mt-2">{loading ? "..." : value}</h3></div><span className={`catalog-stat-icon ${color} p-3 rounded-xl text-xl`}>{icon}</span></div></div>
         ))}
       </div>
       <div className="glassmorphism p-6 rounded-2xl shadow-md mb-6">
@@ -482,8 +508,8 @@ function AttributeList({ initialRows = null, initialError = "" }) {
       </div>
       <div className="glassmorphism p-6 rounded-2xl shadow-md overflow-x-auto">
         {loading ? <div className="flex justify-center py-12"><FaSpinner className="text-rose-gold text-4xl animate-spin" /></div> : (
-          <table className="w-full"><thead><tr className="border-b border-gray-700 text-gray-400 text-left"><th className="py-3 px-4">Name</th><th className="py-3 px-4">Slug</th><th className="py-3 px-4">Terms</th><th className="py-3 px-4 text-right">Actions</th></tr></thead><tbody>
-            {visible.length ? visible.map((attribute) => <tr key={attribute._id} className="border-b border-gray-800 hover:bg-gray-800/50"><td className="py-4 px-4 text-white font-medium">{attribute.name}</td><td className="py-4 px-4 text-gray-400">{attribute.slug}</td><td className="py-4 px-4"><div className="flex flex-wrap gap-1">{attribute.terms?.slice(0, 3).map((item, index) => <span key={`${item}-${index}`} className="attribute-term-pill px-2 py-1 text-xs rounded-full">{item}</span>)}{attribute.terms?.length > 3 && <span className="px-2 py-1 text-xs rounded-full bg-gray-700 text-gray-300">+{attribute.terms.length - 3} more</span>}</div></td><td className="py-4 px-4"><div className="flex justify-end gap-2"><Link href={`/admin/attributes/edit/${attribute._id}`} onClick={() => rememberCatalogList("attributes")} className="text-rose-gold p-2 hover:bg-gray-700 rounded-lg" aria-label={`Edit ${attribute.name}`}><FaEdit /></Link><button type="button" onClick={() => setDeleteTarget(attribute)} className="text-red-400 p-2 hover:bg-gray-700 rounded-lg" aria-label={`Delete ${attribute.name}`}><FaTrash /></button></div></td></tr>) : <tr><td colSpan="4" className="py-12 text-center text-gray-400">No attributes found</td></tr>}
+          <table className="w-full"><thead><tr className="border-b border-gray-700 text-gray-400 text-left"><th className="py-3 px-4">Name</th><th className="py-3 px-4">Slug</th><th className="py-3 px-4">Terms</th><th className="py-3 px-4 text-center">Show in Filter</th><th className="py-3 px-4 text-right">Actions</th></tr></thead><tbody>
+            {visible.length ? visible.map((attribute) => { const showInFilters = attribute.showInFilters !== false; const toggling = filterToggleId === attribute._id; return <tr key={attribute._id} className="border-b border-gray-800 hover:bg-gray-800/50"><td className="py-4 px-4 text-white font-medium">{attribute.name}</td><td className="py-4 px-4 text-gray-400">{attribute.slug}</td><td className="py-4 px-4"><div className="flex flex-wrap gap-1">{attribute.terms?.slice(0, 3).map((item, index) => <span key={`${item}-${index}`} className="attribute-term-pill px-2 py-1 text-xs rounded-full">{item}</span>)}{attribute.terms?.length > 3 && <span className="px-2 py-1 text-xs rounded-full bg-gray-700 text-gray-300">+{attribute.terms.length - 3} more</span>}</div></td><td className="py-4 px-4 text-center"><button type="button" role="switch" aria-checked={showInFilters} aria-label={`${showInFilters ? "Hide" : "Show"} ${attribute.name} in storefront filters`} disabled={Boolean(filterToggleId)} onClick={() => toggleFilterVisibility(attribute)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition disabled:cursor-wait disabled:opacity-60 ${showInFilters ? "bg-violet-600" : "bg-gray-600"}`}><span aria-hidden="true" className={`inline-block size-[18px] rounded-full bg-white shadow transition-transform ${showInFilters ? "translate-x-[23px]" : "translate-x-[3px]"}`} />{toggling && <FaSpinner className="absolute left-[15px] text-[12px] text-white animate-spin" />}</button></td><td className="py-4 px-4"><div className="flex justify-end gap-2"><Link href={`/admin/attributes/edit/${attribute._id}`} onClick={() => rememberCatalogList("attributes")} className="text-rose-gold p-2 hover:bg-gray-700 rounded-lg" aria-label={`Edit ${attribute.name}`}><FaEdit /></Link><button type="button" onClick={() => setDeleteTarget(attribute)} className="text-red-400 p-2 hover:bg-gray-700 rounded-lg" aria-label={`Delete ${attribute.name}`}><FaTrash /></button></div></td></tr>; }) : <tr><td colSpan="5" className="py-12 text-center text-gray-400">No attributes found</td></tr>}
           </tbody></table>
         )}
         {pages > 1 && <div className="flex justify-between items-center mt-6 pt-6 border-t border-gray-700"><p className="text-gray-400">Page {page} of {pages} · {filtered.length} total attributes</p><div className="flex gap-2"><button type="button" disabled={page === 1} onClick={() => setPage((value) => value - 1)} className="bg-gray-800 p-3 rounded-lg disabled:opacity-50"><FaChevronLeft /></button>{Array.from({ length: pages }, (_, index) => index + 1).slice(Math.max(0, page - 3), Math.max(5, page + 2)).map((number) => <button type="button" key={number} onClick={() => setPage(number)} className={`px-4 py-2 rounded-lg ${page === number ? "bg-rose-gold text-white" : "bg-gray-800 text-gray-300"}`}>{number}</button>)}<button type="button" disabled={page === pages} onClick={() => setPage((value) => value + 1)} className="bg-gray-800 p-3 rounded-lg disabled:opacity-50"><FaChevronRight /></button></div></div>}
@@ -499,6 +525,8 @@ function FlatCatalogList({ kind, initialRows = null, initialError = "" }) {
     [search, setSearch] = useState(""),
     [loading, setLoading] = useState(initialRows === null),
     [deleteTarget, setDeleteTarget] = useState(null),
+    [selectedIds, setSelectedIds] = useState([]),
+    [bulkDeleteOpen, setBulkDeleteOpen] = useState(false),
     [deleting, setDeleting] = useState(false);
   const publishedCount = rows.filter((row) => row.status === "published").length;
   const thirdStat = kind === "brands"
@@ -519,22 +547,43 @@ function FlatCatalogList({ kind, initialRows = null, initialError = "" }) {
   }, [initialRows, initialError, load, search]);
 
   useEffect(() => {
-    if (!deleteTarget) return;
+    if (!deleteTarget && !bulkDeleteOpen) return;
     const closeOnEscape = (event) => {
-      if (event.key === "Escape" && !deleting) setDeleteTarget(null);
+      if (event.key === "Escape" && !deleting) {
+        setDeleteTarget(null);
+        setBulkDeleteOpen(false);
+      }
     };
     document.addEventListener("keydown", closeOnEscape);
     return () => document.removeEventListener("keydown", closeOnEscape);
-  }, [deleteTarget, deleting]);
+  }, [deleteTarget, bulkDeleteOpen, deleting]);
 
   const remove = async (x) => {
     setDeleting(true);
     const r = await deleteCatalogItem(kind, x._id);
     if (r.success) {
       toast.success(`${one} deleted successfully`);
+      setSelectedIds((current) => current.filter((id) => id !== x._id));
       setDeleteTarget(null);
       await load();
     } else toast.error(r.error);
+    setDeleting(false);
+  };
+  const allVisibleSelected = rows.length > 0 && rows.every((row) => selectedIds.includes(row._id));
+  const toggleAll = () => setSelectedIds(allVisibleSelected ? [] : rows.map((row) => row._id));
+  const toggleSelected = (id) => setSelectedIds((current) => current.includes(id)
+    ? current.filter((item) => item !== id)
+    : [...current, id]);
+  const removeSelected = async () => {
+    if (kind !== "tags" || !selectedIds.length) return;
+    setDeleting(true);
+    const result = await bulkDeleteCatalogItems("tags", selectedIds);
+    if (result.success) {
+      toast.success(`${result.deletedCount} tag${result.deletedCount === 1 ? "" : "s"} deleted successfully`);
+      setSelectedIds([]);
+      setBulkDeleteOpen(false);
+      await load();
+    } else toast.error(result.error || "Could not delete the selected tags");
     setDeleting(false);
   };
   return (
@@ -543,13 +592,24 @@ function FlatCatalogList({ kind, initialRows = null, initialError = "" }) {
         <p className="text-base font-bold text-gray-700">
           Manage product {plural.toLowerCase()}
         </p>
-        <Link
-          href={`/admin/${kind}/create`}
-          onClick={() => rememberCatalogList(kind)}
-          className="bg-rose-gold text-white px-4 py-2 rounded-xl inline-flex gap-2 items-center"
-        >
-          <FaPlus /> Create {one}
-        </Link>
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          {kind === "tags" && selectedIds.length > 0 && (
+            <button
+              type="button"
+              onClick={() => setBulkDeleteOpen(true)}
+              className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-4 py-2 font-semibold text-white hover:bg-red-700"
+            >
+              <FaTrash /> Delete selected ({selectedIds.length})
+            </button>
+          )}
+          <Link
+            href={`/admin/${kind}/create`}
+            onClick={() => rememberCatalogList(kind)}
+            className="bg-rose-gold text-white px-4 py-2 rounded-xl inline-flex gap-2 items-center"
+          >
+            <FaPlus /> Create {one}
+          </Link>
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
@@ -563,7 +623,7 @@ function FlatCatalogList({ kind, initialRows = null, initialError = "" }) {
                 <p className="text-gray-400 text-sm">{stat.label}</p>
                 <h3 className="text-2xl font-bold text-white mt-2">{loading ? "..." : stat.value}</h3>
               </div>
-              <span className={`${stat.color} p-3 rounded-xl text-white text-xl`}>{stat.icon}</span>
+              <span className={`catalog-stat-icon ${stat.color} p-3 rounded-xl text-xl`}>{stat.icon}</span>
             </div>
           </div>
         ))}
@@ -575,7 +635,10 @@ function FlatCatalogList({ kind, initialRows = null, initialError = "" }) {
             className="w-full bg-gray-800 border border-gray-700 rounded-xl pl-10 py-2.5"
             placeholder={`Search ${plural.toLowerCase()}`}
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setSelectedIds([]);
+            }}
           />
         </div>
       </div>
@@ -583,6 +646,11 @@ function FlatCatalogList({ kind, initialRows = null, initialError = "" }) {
         <table className="w-full">
           <thead>
             <tr>
+              {kind === "tags" && (
+                <th className="w-14 px-5 py-3 text-left">
+                  <input className="size-4" style={{ accentColor: "var(--admin-primary)" }} type="checkbox" checked={allVisibleSelected} onChange={toggleAll} aria-label="Select all tags" />
+                </th>
+              )}
               <th className="px-5 py-3 text-left">Name</th>
               <th className="px-5 py-3 text-left">Slug</th>
               <th className="px-5 py-3 text-left">Status</th>
@@ -593,7 +661,7 @@ function FlatCatalogList({ kind, initialRows = null, initialError = "" }) {
             {loading ? (
               Array.from({ length: 5 }, (_, i) => (
                 <tr key={i} className="blog-table-skeleton">
-                  <td colSpan="4" className="p-4">
+                  <td colSpan={kind === "tags" ? 5 : 4} className="p-4">
                     <span className="blog-skeleton-block w-full" />
                   </td>
                 </tr>
@@ -601,6 +669,11 @@ function FlatCatalogList({ kind, initialRows = null, initialError = "" }) {
             ) : rows.length ? (
               rows.map((x) => (
                 <tr key={x._id}>
+                  {kind === "tags" && (
+                    <td className="px-5 py-4">
+                      <input className="size-4" style={{ accentColor: "var(--admin-primary)" }} type="checkbox" checked={selectedIds.includes(x._id)} onChange={() => toggleSelected(x._id)} aria-label={`Select ${x.name}`} />
+                    </td>
+                  )}
                   <td className="px-5 py-4 font-medium">
                     {kind === "brands" ? (
                       <div className="flex items-center gap-3">
@@ -649,7 +722,7 @@ function FlatCatalogList({ kind, initialRows = null, initialError = "" }) {
               ))
             ) : (
               <tr>
-                <td className="p-8 text-center text-gray-400" colSpan="4">
+                <td className="p-8 text-center text-gray-400" colSpan={kind === "tags" ? 5 : 4}>
                   No {plural.toLowerCase()} found
                 </td>
               </tr>
@@ -675,6 +748,29 @@ function FlatCatalogList({ kind, initialRows = null, initialError = "" }) {
               <button type="button" className="category-confirm-cancel" disabled={deleting} onClick={() => setDeleteTarget(null)}>Cancel</button>
               <button type="button" className="category-confirm-delete" disabled={deleting} onClick={() => remove(deleteTarget)}>
                 {deleting ? <><FaSpinner className="animate-spin" /> Deleting...</> : <><FaTrash /> Delete {one}</>}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+      {bulkDeleteOpen && (
+        <div
+          className="category-modal-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget && !deleting) setBulkDeleteOpen(false);
+          }}
+        >
+          <section className="category-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="bulk-tag-delete-title" aria-describedby="bulk-tag-delete-description">
+            <span className="category-confirm-icon" aria-hidden="true"><FaExclamationTriangle /></span>
+            <div className="category-confirm-copy">
+              <h2 id="bulk-tag-delete-title">Delete selected tags?</h2>
+              <p id="bulk-tag-delete-description">Are you sure you want to delete <strong>{selectedIds.length} selected tag{selectedIds.length === 1 ? "" : "s"}</strong>? They will also be removed from assigned products. This action cannot be undone.</p>
+            </div>
+            <div className="category-confirm-actions">
+              <button type="button" className="category-confirm-cancel" disabled={deleting} onClick={() => setBulkDeleteOpen(false)}>Cancel</button>
+              <button type="button" className="category-confirm-delete" disabled={deleting} onClick={() => void removeSelected()}>
+                {deleting ? <><FaSpinner className="animate-spin" /> Deleting...</> : <><FaTrash /> Delete selected</>}
               </button>
             </div>
           </section>

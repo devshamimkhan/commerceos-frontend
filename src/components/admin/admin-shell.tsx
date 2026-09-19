@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { AdminNavigation } from "./admin-navigation";
 import type { AuthUser } from "@/lib/auth";
 import { usePathname } from "next/navigation";
 import { LuMenu as LuMenu, LuPanelLeftClose as LuPanelLeftClose, LuPanelLeftOpen as LuPanelLeftOpen, LuX as LuX } from 'react-icons/lu';
-import { AdminThemeToggle } from "./admin-theme-toggle";
+import { ADMIN_THEME_UPDATED_EVENT, type AdminThemeSettings } from "@/lib/admin-theme";
 
 const SIDEBAR_STORAGE_KEY = "admin-sidebar-collapsed";
 
@@ -27,16 +27,58 @@ function resetMobileSidebarScroll() {
   if (nav) nav.scrollTop = 0;
 }
 
-export function AdminShell({ user, children }: { user: AuthUser; children: React.ReactNode }) {
+type ThemeStyle = CSSProperties & Record<`--${string}`, string>;
+
+export function AdminShell({ user, initialTheme, children }: { user: AuthUser; initialTheme: AdminThemeSettings; children: React.ReactNode }) {
   const fullName = user.name;
   const role = user.role;
   const userInitial = user.name.trim().charAt(0).toUpperCase() || "A";
-  const sidebarContent = <AdminNavigation />;
 
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [theme, setTheme] = useState(initialTheme);
+  const sidebarContent = <AdminNavigation logoUrl={theme.adminLogoUrl} faviconUrl={theme.adminFaviconUrl} />;
   const pageTitle = useMemo(() => getPageTitle(pathname), [pathname]);
+  const themeStyle = useMemo<ThemeStyle>(() => ({
+    '--admin-primary': theme.primary,
+    '--admin-secondary': theme.secondary,
+    '--admin-accent': theme.accent,
+    '--admin-page-background': theme.pageBackground,
+    '--admin-surface-color': theme.surface,
+    '--admin-heading-color': theme.heading,
+    '--admin-text-color': theme.text,
+    '--admin-muted-color': theme.muted,
+    '--admin-success': theme.success,
+    '--admin-warning': theme.warning,
+    '--admin-danger': theme.danger,
+    '--admin-info': theme.info,
+    '--admin-button-primary-bg': theme.buttonPrimaryBackground,
+    '--admin-button-primary-hover': theme.buttonPrimaryHover,
+    '--admin-button-primary-text': theme.buttonPrimaryText,
+    '--admin-button-secondary-bg': theme.buttonSecondaryBackground,
+    '--admin-button-secondary-hover': theme.buttonSecondaryHover,
+    '--admin-button-secondary-text': theme.buttonSecondaryText,
+    '--admin-button-danger-bg': theme.buttonDangerBackground,
+    '--admin-button-danger-hover': theme.buttonDangerHover,
+    '--admin-button-danger-text': theme.buttonDangerText,
+    '--admin-button-radius': `${theme.buttonRadius}px`,
+  }), [theme]);
+
+  useEffect(() => {
+    const updateTheme = (event: Event) => setTheme((event as CustomEvent<AdminThemeSettings>).detail);
+    window.addEventListener(ADMIN_THEME_UPDATED_EVENT, updateTheme);
+    return () => window.removeEventListener(ADMIN_THEME_UPDATED_EVENT, updateTheme);
+  }, []);
+
+  useEffect(() => {
+    const favicon = document.createElement('link');
+    favicon.rel = 'icon';
+    favicon.href = theme.adminFaviconUrl || '/icon.png';
+    favicon.dataset.adminFavicon = 'true';
+    document.head.appendChild(favicon);
+    return () => favicon.remove();
+  }, [theme.adminFaviconUrl]);
 
   const openMobileSidebar = () => {
     resetMobileSidebarScroll();
@@ -93,6 +135,7 @@ export function AdminShell({ user, children }: { user: AuthUser; children: React
       className={`admin-container ${isCollapsed ? "sidebar-is-collapsed" : ""} ${
         isMobileOpen ? "sidebar-is-open" : ""
       }`}
+      style={themeStyle}
     >
       <aside className="admin-sidebar" aria-label="Admin navigation">
         <button
@@ -137,13 +180,12 @@ export function AdminShell({ user, children }: { user: AuthUser; children: React
               <LuMenu />
             </button>
             <div>
-              <span>CommerceOS Admin</span>
+              <span>CommerceXLab Admin</span>
               <h1>{pageTitle}</h1>
             </div>
           </div>
 
           <div className="admin-topbar-actions">
-            <AdminThemeToggle compact />
             <div className="admin-user-summary">
               <span className="admin-user-avatar">{userInitial}</span>
               <span className="admin-user-copy">

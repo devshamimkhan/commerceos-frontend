@@ -18,7 +18,7 @@ async function credentials() {
 export async function uploaderFetch(path, options = {}) {
   if (!path.startsWith('/api/')) throw new Error('Invalid media API path');
   const auth = await credentials();
-  const response = await fetch(auth.baseUrl + path, {
+  const response = await fetch('/media-service' + path, {
     ...options, credentials: 'omit', cache: 'no-store',
     headers: { ...options.headers, Authorization: 'Bearer ' + auth.token },
     signal: options.signal || AbortSignal.timeout(120000),

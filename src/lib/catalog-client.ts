@@ -27,3 +27,4 @@ export const getCatalogItem = (kind, id) => call(`/${kind}/${id}`);
 export const createCatalogItem = (kind, body) => call(`/${kind}`, 'POST', body);
 export const updateCatalogItem = (kind, id, body) => call(`/${kind}/${id}`, 'PUT', body);
 export const deleteCatalogItem = (kind, id) => call(`/${kind}/${id}`, 'DELETE', {});
+export const bulkDeleteCatalogItems = (kind, ids) => call(`/${kind}/bulk`, 'DELETE', { ids });

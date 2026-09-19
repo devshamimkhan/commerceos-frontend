@@ -10,7 +10,7 @@
     border-color 180ms ease;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .glassmorphism {
+.admin-container .blog-workspace .glassmorphism {
   box-shadow: 0 10px 24px rgba(17, 24, 39, 0.08);
 }
 
@@ -63,27 +63,27 @@
   }
 }
 
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   [class~="text-white"]:not(button):not(a):not([role="button"]) {
   color: #111827 !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="text-gray-400"] {
+.admin-container .blog-workspace [class*="text-gray-400"] {
   color: #6b7280 !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="text-gray-300"] {
+.admin-container .blog-workspace [class*="text-gray-300"] {
   color: #4b5563 !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="border-gray-800"],
-.admin-container:not(.is-dark) .blog-workspace [class*="border-gray-700"],
-.admin-container:not(.is-dark) .blog-workspace [class*="border-zinc-800"] {
+.admin-container .blog-workspace [class*="border-gray-800"],
+.admin-container .blog-workspace [class*="border-gray-700"],
+.admin-container .blog-workspace [class*="border-zinc-800"] {
   border-color: #e5e7eb !important;
 }
 
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   [class*="divide-gray-700"]
   > :not([hidden])
@@ -91,108 +91,108 @@
   border-color: #e5e7eb !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="bg-gray-900"],
-.admin-container:not(.is-dark) .blog-workspace [class*="bg-gray-800"],
-.admin-container:not(.is-dark) .blog-workspace [class*="bg-gray-700"] {
+.admin-container .blog-workspace [class*="bg-gray-900"],
+.admin-container .blog-workspace [class*="bg-gray-800"],
+.admin-container .blog-workspace [class*="bg-gray-700"] {
   background-color: #ffffff !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="hover:bg-gray-700"],
-.admin-container:not(.is-dark) .blog-workspace [class*="hover:bg-gray-800"] {
+.admin-container .blog-workspace [class*="hover:bg-gray-700"],
+.admin-container .blog-workspace [class*="hover:bg-gray-800"] {
   --tw-bg-opacity: 1;
   background-color: #d1d5db !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="bg-gray-800/50"] {
+.admin-container .blog-workspace [class*="bg-gray-800/50"] {
   background-color: #ffffff !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="bg-gray-900/50"] {
+.admin-container .blog-workspace [class*="bg-gray-900/50"] {
   background-color: #ffffff !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="hover:bg-gray-700/30"] {
+.admin-container .blog-workspace [class*="hover:bg-gray-700/30"] {
   background-color: #e5e7eb !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace {
+.admin-container .blog-workspace {
   color: #111827;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="bg-rose-gold"] {
+.admin-container .blog-workspace [class*="bg-rose-gold"] {
   background-color: #ec4899 !important;
   color: #ffffff !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="hover:bg-pink-600"] {
+.admin-container .blog-workspace [class*="hover:bg-pink-600"] {
   background-color: #db2777 !important;
   color: #ffffff !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .quill-editor {
+.admin-container .blog-workspace .quill-editor {
   background-color: #ffffff !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .quill-editor .ql-toolbar,
-.admin-container:not(.is-dark) .blog-workspace .ql-toolbar {
+.admin-container .blog-workspace .quill-editor .ql-toolbar,
+.admin-container .blog-workspace .ql-toolbar {
   background-color: #f3f4f6 !important;
   border-color: #d1d5db !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .quill-editor .ql-container,
-.admin-container:not(.is-dark) .blog-workspace .ql-container {
+.admin-container .blog-workspace .quill-editor .ql-container,
+.admin-container .blog-workspace .ql-container {
   border-color: #d1d5db !important;
   background-color: #ffffff !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .quill-editor .ql-editor,
-.admin-container:not(.is-dark) .blog-workspace .ql-editor {
+.admin-container .blog-workspace .quill-editor .ql-editor,
+.admin-container .blog-workspace .ql-editor {
   color: #111827 !important;
   background-color: #ffffff !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .ql-editor.ql-blank::before {
+.admin-container .blog-workspace .ql-editor.ql-blank::before {
   color: #6b7280;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .ql-snow .ql-stroke {
+.admin-container .blog-workspace .ql-snow .ql-stroke {
   stroke: #111827 !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .ql-snow .ql-fill {
+.admin-container .blog-workspace .ql-snow .ql-fill {
   fill: #111827 !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .ql-snow .ql-picker {
+.admin-container .blog-workspace .ql-snow .ql-picker {
   color: #111827 !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .ql-toolbar button,
-.admin-container:not(.is-dark) .blog-workspace .ql-toolbar .ql-picker-label,
-.admin-container:not(.is-dark) .blog-workspace .ql-toolbar .ql-picker-item {
+.admin-container .blog-workspace .ql-toolbar button,
+.admin-container .blog-workspace .ql-toolbar .ql-picker-label,
+.admin-container .blog-workspace .ql-toolbar .ql-picker-item {
   color: #111827 !important;
   opacity: 1 !important;
 }
 
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   .ql-toolbar
   .ql-formats
   button:hover
   .ql-stroke,
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   .ql-toolbar
   .ql-formats
   button.ql-active
   .ql-stroke,
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   .ql-toolbar
   .ql-formats
   button:hover
   .ql-fill,
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   .ql-toolbar
   .ql-formats
@@ -202,9 +202,9 @@
   fill: #111827 !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .ql-snow .ql-picker-options,
-.admin-container:not(.is-dark) .blog-workspace .ql-snow .ql-tooltip,
-.admin-container:not(.is-dark)
+.admin-container .blog-workspace .ql-snow .ql-picker-options,
+.admin-container .blog-workspace .ql-snow .ql-tooltip,
+.admin-container
   .blog-workspace
   .ql-snow
   .ql-tooltip
@@ -214,19 +214,19 @@
   border-color: #d1d5db !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .ql-snow .ql-picker-options {
+.admin-container .blog-workspace .ql-snow .ql-picker-options {
   background-color: #ffffff !important;
   color: #111827 !important;
   border-color: #d1d5db !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .ql-snow .ql-picker-item,
-.admin-container:not(.is-dark) .blog-workspace .ql-snow .ql-picker-label {
+.admin-container .blog-workspace .ql-snow .ql-picker-item,
+.admin-container .blog-workspace .ql-snow .ql-picker-label {
   color: #111827 !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace .ql-snow .ql-picker-item:hover,
-.admin-container:not(.is-dark)
+.admin-container .blog-workspace .ql-snow .ql-picker-item:hover,
+.admin-container
   .blog-workspace
   .ql-snow
   .ql-picker-item.ql-selected {
@@ -575,48 +575,48 @@
   outline: none;
 }
 
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   [class~="text-white"]:not(button):not(a):not([role="button"]),
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   [class~="text-white"]:not(button):not(a):not([role="button"]) {
   color: var(--admin-heading) !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="text-gray-400"],
-.admin-container:not(.is-dark) .blog-workspace [class*="text-gray-300"],
-.admin-container:not(.is-dark) .blog-workspace [class*="text-zinc-300"],
-.admin-container:not(.is-dark) .blog-workspace [class*="text-zinc-300"] {
+.admin-container .blog-workspace [class*="text-gray-400"],
+.admin-container .blog-workspace [class*="text-gray-300"],
+.admin-container .blog-workspace [class*="text-zinc-300"],
+.admin-container .blog-workspace [class*="text-zinc-300"] {
   color: var(--admin-muted) !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="border-gray-800"],
-.admin-container:not(.is-dark) .blog-workspace [class*="border-gray-700"],
-.admin-container:not(.is-dark) .blog-workspace [class*="border-gray-600"],
-.admin-container:not(.is-dark) .blog-workspace [class*="border-zinc-800"] {
+.admin-container .blog-workspace [class*="border-gray-800"],
+.admin-container .blog-workspace [class*="border-gray-700"],
+.admin-container .blog-workspace [class*="border-gray-600"],
+.admin-container .blog-workspace [class*="border-zinc-800"] {
   border-color: #e5e7f2 !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace [class*="bg-gray-900"],
-.admin-container:not(.is-dark) .blog-workspace [class*="bg-gray-800"],
-.admin-container:not(.is-dark) .blog-workspace [class*="bg-gray-700"] {
+.admin-container .blog-workspace [class*="bg-gray-900"],
+.admin-container .blog-workspace [class*="bg-gray-800"],
+.admin-container .blog-workspace [class*="bg-gray-700"] {
   background-color: rgba(255, 255, 255, 0.76) !important;
 }
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   [class*="bg-gray-"][class~="text-white"],
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   [class*="bg-gray-"][class~="text-white"] {
   color: var(--admin-text) !important;
   -webkit-text-fill-color: var(--admin-text) !important;
 }
 
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   [class*="bg-gray-"][class*="hover:text-white"]:hover,
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   [class*="bg-gray-"][class*="hover:text-white"]:hover {
   color: var(--admin-heading) !important;
@@ -733,8 +733,9 @@
   }
 }
 
-.admin-container .blog-workspace .blog-editor-page {
-  padding-bottom: 102px;
+.admin-container .blog-workspace .blog-editor-page,
+.admin-container .blog-workspace.blog-editor-page {
+  padding-bottom: 84px;
 }
 
 .admin-container .blog-workspace .blog-publish-bar {
@@ -758,10 +759,6 @@
 .admin-container.sidebar-is-collapsed .blog-workspace .blog-publish-bar {
   left: 96px;
 }
-.admin-container.is-dark .blog-workspace .blog-publish-bar {
-  background: rgba(21, 21, 38, 0.94);
-}
-
 .admin-container .blog-workspace .blog-publish-bar-copy,
 .admin-container .blog-workspace .blog-publish-bar-actions,
 .admin-container .blog-workspace .blog-publish-status,
@@ -898,9 +895,6 @@
   background: rgba(255, 255, 255, 0.5);
   cursor: pointer;
 }
-.admin-container.is-dark .catalog-module .catalog-switch-row {
-  background: rgba(255, 255, 255, 0.035);
-}
 .admin-container .catalog-module .catalog-switch-row input {
   position: absolute;
   width: 1px;
@@ -995,8 +989,9 @@
 }
 
 @media (max-width: 767px) {
-  .admin-container .blog-workspace .blog-editor-page {
-    padding-bottom: 178px;
+  .admin-container .blog-workspace .blog-editor-page,
+  .admin-container .blog-workspace.blog-editor-page {
+    padding-bottom: 160px;
   }
   .admin-container .blog-workspace .blog-publish-bar {
     left: 0;
@@ -1030,14 +1025,6 @@
   background: rgba(245, 243, 255, 0.54);
 }
 
-.admin-container.is-dark .blog-workspace thead,
-.admin-container.is-dark .blog-workspace tbody tr:hover {
-  background: rgba(255, 255, 255, 0.035);
-}
-
-.admin-container.is-dark .blog-workspace th {
-  color: #c4b5fd;
-}
 .admin-container
   .blog-workspace
   :is(button, a, [role="button"])[class*="bg-rose-gold"],
@@ -1143,24 +1130,24 @@
   color: #ffffff !important;
 }
 
-.admin-container:not(.is-dark) .blog-workspace button.bg-rose-gold.text-white,
-.admin-container:not(.is-dark) .blog-workspace a.bg-rose-gold.text-white,
-.admin-container:not(.is-dark)
+.admin-container .blog-workspace button.bg-rose-gold.text-white,
+.admin-container .blog-workspace a.bg-rose-gold.text-white,
+.admin-container
   .blog-workspace
   button[class*="bg-pink-"][class~="text-white"],
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   a[class*="bg-pink-"][class~="text-white"],
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   button[class*="bg-fuchsia-"][class~="text-white"],
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   a[class*="bg-fuchsia-"][class~="text-white"],
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   button[class*="bg-rose-600"][class~="text-white"],
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   a[class*="bg-rose-600"][class~="text-white"] {
   color: #ffffff !important;
@@ -1200,22 +1187,22 @@
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
-.admin-container:not(.is-dark) .blog-workspace legend,
-.admin-container:not(.is-dark) .blog-workspace legend {
+.admin-container .blog-workspace legend,
+.admin-container .blog-workspace legend {
   color: #111827 !important;
   -webkit-text-fill-color: #111827 !important;
 }
-.admin-container:not(.is-dark) .blog-workspace [class~="text-gray-200"],
-.admin-container:not(.is-dark) .blog-workspace [class~="text-zinc-200"],
-.admin-container:not(.is-dark) .blog-workspace [class~="text-slate-200"],
-.admin-container:not(.is-dark) .blog-workspace [class~="text-gray-200"],
-.admin-container:not(.is-dark) .blog-workspace [class~="text-zinc-200"],
-.admin-container:not(.is-dark) .blog-workspace [class~="text-slate-200"] {
+.admin-container .blog-workspace [class~="text-gray-200"],
+.admin-container .blog-workspace [class~="text-zinc-200"],
+.admin-container .blog-workspace [class~="text-slate-200"],
+.admin-container .blog-workspace [class~="text-gray-200"],
+.admin-container .blog-workspace [class~="text-zinc-200"],
+.admin-container .blog-workspace [class~="text-slate-200"] {
   color: var(--admin-heading) !important;
   -webkit-text-fill-color: var(--admin-heading) !important;
 }
 
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   :is(
     button,
@@ -1223,7 +1210,7 @@
     span,
     div
   )[class~="rounded-full"][class*="px-"][class~="text-gray-200"],
-.admin-container:not(.is-dark)
+.admin-container
   .blog-workspace
   :is(
     button,
@@ -1242,7 +1229,7 @@
   font-family: var(--font-admin-latin), var(--font-admin-bengali), sans-serif;
 }
 
-/* Shared media picker: use the CommerceOS purple system instead of the
+/* Shared media picker: use the admin theme system instead of the
    legacy Glowify pink/blue utility colors. The compact proportions keep the
    editor visible behind the dialog while leaving enough room for the library. */
 .blog-workspace [data-blog-media-dialog] {
@@ -1431,6 +1418,152 @@
   }
 }
 
+/* Keep catalog and product create/edit controls in sync with Theme Settings.
+   This block intentionally sits last so legacy utility classes cannot win the
+   cascade after a custom palette is applied by AdminShell. */
+.admin-container .blog-workspace button[class*="bg-rose-gold"],
+.admin-container .blog-workspace a[class*="bg-rose-gold"],
+.admin-container .blog-workspace button[class~="bg-violet-700"],
+.admin-container .blog-workspace button[class~="!bg-violet-700"],
+.admin-container .blog-workspace button[class~="bg-violet-600"],
+.admin-container .blog-workspace button[class~="!bg-violet-600"],
+.admin-container .blog-workspace button[class~="bg-indigo-600"],
+.admin-container .blog-workspace button[class~="!bg-indigo-600"],
+.admin-container .blog-workspace .blog-publish-submit {
+  border-color: var(--admin-button-primary-bg) !important;
+  border-radius: var(--admin-button-radius) !important;
+  background-color: var(--admin-button-primary-bg) !important;
+  background-image: none !important;
+  color: var(--admin-button-primary-text) !important;
+  -webkit-text-fill-color: var(--admin-button-primary-text) !important;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--admin-button-primary-bg) 22%, transparent) !important;
+}
+
+.admin-container .blog-workspace button[class*="bg-rose-gold"]:hover,
+.admin-container .blog-workspace a[class*="bg-rose-gold"]:hover,
+.admin-container .blog-workspace button[class~="hover:bg-pink-600"]:hover,
+.admin-container .blog-workspace button[class~="hover:!bg-violet-800"]:hover,
+.admin-container .blog-workspace button[class~="hover:!bg-violet-700"]:hover,
+.admin-container .blog-workspace .blog-publish-submit:hover {
+  border-color: var(--admin-button-primary-hover) !important;
+  background-color: var(--admin-button-primary-hover) !important;
+  background-image: none !important;
+}
+
+.admin-container .blog-workspace [class~="bg-purple-500"] {
+  background-color: var(--admin-secondary) !important;
+  background-image: none !important;
+  color: #ffffff !important;
+}
+
+.admin-container .blog-workspace [class~="bg-blue-500"] {
+  background-color: var(--admin-info) !important;
+  background-image: none !important;
+  color: #ffffff !important;
+}
+
+.admin-container .blog-workspace [class~="bg-gradient-pink"] {
+  background: linear-gradient(135deg, var(--admin-primary), var(--admin-accent)) !important;
+  color: #ffffff !important;
+}
+
+.admin-container .blog-workspace .catalog-stat-icon,
+.admin-container .blog-workspace .catalog-stat-icon svg {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.admin-container .blog-workspace [class~="text-rose-gold"],
+.admin-container .blog-workspace [class~="text-violet-700"],
+.admin-container .blog-workspace [class~="!text-violet-700"],
+.admin-container .blog-workspace [class~="text-violet-800"],
+.admin-container .blog-workspace [class~="!text-violet-800"],
+.admin-container .blog-workspace [class~="text-purple-700"],
+.admin-container .blog-workspace [class~="!text-purple-700"] {
+  color: var(--admin-primary) !important;
+  -webkit-text-fill-color: var(--admin-primary) !important;
+}
+
+.admin-container .blog-workspace [class~="bg-violet-50"],
+.admin-container .blog-workspace [class~="!bg-violet-50"],
+.admin-container .blog-workspace [class~="bg-violet-100"],
+.admin-container .blog-workspace [class~="!bg-violet-100"],
+.admin-container .blog-workspace [class~="bg-violet-100/70"],
+.admin-container .blog-workspace [class~="bg-violet-50/40"],
+.admin-container .blog-workspace [class~="bg-purple-100"] {
+  background-color: color-mix(in srgb, var(--admin-primary) 12%, var(--admin-surface-color)) !important;
+  background-image: none !important;
+}
+
+.admin-container .blog-workspace [class~="border-violet-200"],
+.admin-container .blog-workspace [class~="!border-violet-200"],
+.admin-container .blog-workspace [class~="border-violet-400"],
+.admin-container .blog-workspace [class~="!border-violet-400"],
+.admin-container .blog-workspace [class~="border-violet-700"],
+.admin-container .blog-workspace [class~="!border-violet-700"],
+.admin-container .blog-workspace [class~="border-indigo-200"],
+.admin-container .blog-workspace [class~="!border-indigo-600"] {
+  border-color: color-mix(in srgb, var(--admin-accent) 45%, transparent) !important;
+}
+
+.admin-container .blog-workspace [class~="focus:border-violet-600"]:focus,
+.admin-container .blog-workspace [class~="focus-within:border-violet-600"]:focus-within,
+.admin-container .blog-workspace [class~="focus-within:border-violet-500"]:focus-within,
+.admin-container .blog-workspace [class~="focus:ring-rose-gold"]:focus,
+.admin-container .blog-workspace [class~="focus:ring-violet-600/10"]:focus,
+.admin-container .blog-workspace [class~="focus-within:ring-violet-600/10"]:focus-within,
+.admin-container .blog-workspace [class~="hover:border-violet-500"]:hover,
+.admin-container .blog-workspace [class~="hover:!border-violet-700"]:hover,
+.admin-container .blog-workspace [class~="hover:border-indigo-500"]:hover {
+  border-color: var(--admin-accent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--admin-accent) 16%, transparent) !important;
+}
+
+.admin-container .blog-workspace [class~="accent-violet-700"] {
+  accent-color: var(--admin-primary) !important;
+}
+
+.admin-container .blog-workspace .catalog-switch-row input:checked + .catalog-switch,
+.admin-container .blog-workspace .peer:checked ~ [class~="peer-checked:from-violet-600"] {
+  background: linear-gradient(135deg, var(--admin-primary), var(--admin-accent)) !important;
+  box-shadow: 0 5px 13px color-mix(in srgb, var(--admin-primary) 24%, transparent) !important;
+}
+
+.admin-container .blog-workspace .catalog-switch-row:focus-within {
+  border-color: var(--admin-accent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--admin-accent) 14%, transparent) !important;
+}
+
+.admin-container .blog-workspace .blog-publish-bar-icon,
+.admin-container .blog-workspace .attribute-term-pill {
+  border-color: color-mix(in srgb, var(--admin-primary) 30%, transparent) !important;
+  background: color-mix(in srgb, var(--admin-primary) 12%, var(--admin-surface-color)) !important;
+  color: var(--admin-primary) !important;
+}
+
+.admin-container .blog-workspace .catalog-media-field,
+.admin-container .blog-workspace .image-upload-area {
+  border-color: color-mix(in srgb, var(--admin-accent) 32%, transparent) !important;
+}
+
+.admin-container .blog-workspace [data-blog-media-dialog] > div:first-child > div:first-child > div:first-child {
+  background: linear-gradient(135deg, var(--admin-primary), var(--admin-accent)) !important;
+  color: #ffffff !important;
+}
+
+.admin-container .blog-workspace [data-blog-media-dialog] button[class*="bg-pink"],
+.admin-container .blog-workspace [data-blog-media-dialog] button[class*="bg-violet"] {
+  border-radius: var(--admin-button-radius) !important;
+  background: var(--admin-button-primary-bg) !important;
+  color: var(--admin-button-primary-text) !important;
+}
+
+.admin-container .blog-workspace [data-blog-media-dialog] button[class*="border-pink"],
+.admin-container .blog-workspace [data-blog-media-dialog] button[class*="text-pink"] {
+  border-color: var(--admin-accent) !important;
+  color: var(--admin-primary) !important;
+}
+
 /* Stable modal primitives used by the picker markup. */
 .blog-workspace [data-blog-media-dialog] {
   display: grid !important;
@@ -1567,4 +1700,48 @@
   .blog-workspace [data-blog-media-dialog] .media-picker-details {
     display: none !important;
   }
+}
+
+/* The stable picker layout above defines its own colors, so theme overrides
+   for its interactive controls must remain after those layout rules. */
+.admin-container .blog-workspace [data-blog-media-dialog] > div:first-child > div:first-child > div:first-child {
+  background: linear-gradient(135deg, var(--admin-primary), var(--admin-accent)) !important;
+  color: #ffffff !important;
+}
+
+.admin-container .blog-workspace [data-blog-media-dialog] button[class*="bg-pink"],
+.admin-container .blog-workspace [data-blog-media-dialog] button[class*="bg-violet"] {
+  border-radius: var(--admin-button-radius) !important;
+  background: var(--admin-button-primary-bg) !important;
+  color: var(--admin-button-primary-text) !important;
+}
+
+.admin-container .blog-workspace [data-blog-media-dialog] button[class*="border-pink"],
+.admin-container .blog-workspace [data-blog-media-dialog] button[class*="text-pink"],
+.admin-container .blog-workspace [data-blog-media-dialog] .media-picker-tab:hover,
+.admin-container .blog-workspace [data-blog-media-dialog] .media-picker-tab-active {
+  border-color: var(--admin-accent) !important;
+  color: var(--admin-primary) !important;
+}
+
+.admin-container .blog-workspace [data-blog-media-dialog],
+.admin-container .blog-workspace [data-blog-media-dialog] > div,
+.admin-container .blog-workspace [data-blog-media-dialog] .media-picker-body,
+.admin-container .blog-workspace [data-blog-media-dialog] .media-picker-library-main,
+.admin-container .blog-workspace [data-blog-media-dialog] .media-picker-details,
+.admin-container .blog-workspace [data-blog-media-dialog] .media-picker-footer {
+  border-color: var(--admin-border) !important;
+  background: var(--admin-surface-color) !important;
+  color: var(--admin-text) !important;
+}
+
+.admin-container .blog-workspace .featured-image-action:not([class~="bg-red-500"]):not([class~="bg-red-600"]) {
+  border-color: color-mix(in srgb, var(--admin-button-secondary-text) 24%, transparent) !important;
+  border-radius: var(--admin-button-radius) !important;
+  background: var(--admin-button-secondary-bg) !important;
+  color: var(--admin-button-secondary-text) !important;
+}
+
+.admin-container .blog-workspace .featured-image-action:not([class~="bg-red-500"]):not([class~="bg-red-600"]):hover {
+  background: var(--admin-button-secondary-hover) !important;
 }

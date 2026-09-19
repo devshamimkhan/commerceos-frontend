@@ -66,7 +66,7 @@ export function AuthForm() {
       <header className="auth-header">
         <p className="auth-eyebrow">Workspace access</p>
         <h1>Welcome back</h1>
-        <p>Sign in to your CommerceOS workspace.</p>
+        <p>Sign in to your CommerceXLab workspace.</p>
       </header>
 
       <form onSubmit={submit} className="auth-form" aria-busy={pending}>

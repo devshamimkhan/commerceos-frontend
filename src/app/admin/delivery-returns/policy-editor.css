@@ -1,0 +1,86 @@
+.policy-editor .benefits-editor {
+  min-width: 0;
+  border-radius: 12px;
+}
+
+.policy-editor .benefits-heading {
+  margin-bottom: 24px;
+}
+
+.policy-editor .quill {
+  min-width: 0;
+  background: var(--admin-input-bg, #fff);
+  border-radius: 8px;
+  border: 1px solid var(--admin-border);
+}
+
+.policy-editor .ql-toolbar.ql-snow {
+  background: var(--admin-surface, #f3f4f6);
+  padding: 10px 12px;
+  border: 0;
+  border-bottom: 1px solid var(--admin-border);
+  border-radius: 8px 8px 0 0;
+}
+
+.policy-editor .ql-toolbar button {
+  width: 28px;
+  height: 28px;
+  padding: 3px 5px;
+  border-radius: 4px;
+  background: transparent;
+}
+
+.policy-editor .ql-toolbar .ql-formats {
+  margin-right: 12px;
+}
+
+.policy-editor .ql-container.ql-snow {
+  border: 0;
+  border-radius: 0 0 8px 8px;
+  font: inherit;
+}
+
+.policy-editor .ql-editor {
+  min-height: 240px;
+  max-height: 480px;
+  padding: 18px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.policy-editor .ql-snow .ql-picker-label {
+  color: var(--admin-heading, #111827);
+}
+
+.policy-editor .ql-snow .ql-picker.ql-header {
+  width: 100px;
+}
+
+.policy-editor .ql-snow .ql-picker.ql-header > .ql-picker-label {
+  border: 1px solid var(--admin-muted, #64748b);
+  border-radius: 8px;
+  padding-left: 8px;
+}
+
+.policy-editor .ql-snow .ql-stroke { stroke: var(--admin-heading, #111827); }
+.policy-editor .ql-snow .ql-fill { fill: var(--admin-heading, #111827); }
+.policy-editor .ql-editor.ql-blank::before {
+  color: var(--admin-muted, #94a3b8);
+  font-style: normal;
+}
+
+.policy-editor .ql-editor h2 {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.policy-editor .policy-editor-actions {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--admin-border, #e1e4ef);
+}
+
+@media (max-width: 700px) {
+  .policy-editor .benefits-editor { padding: 16px; }
+  .policy-editor .ql-editor { min-height: 200px; }
+}

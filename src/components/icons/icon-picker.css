@@ -1,0 +1,14 @@
+.icon-picker{position:fixed;inset:0;margin:auto;box-sizing:border-box;width:min(440px,calc(100vw - 24px));max-height:min(480px,70dvh);padding:16px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#475569 #111827;border:1px solid #354155;border-radius:12px;background:#111827;color:#d1d5db;box-shadow:0 24px 70px #0005}.icon-picker::backdrop{background:#11182780}.icon-picker header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.icon-picker h2{font-size:15px;margin:0;color:white}.icon-picker button{cursor:pointer;color:inherit;background:transparent;border:0;border-radius:8px}.icon-picker header button{font-size:22px;line-height:1;width:28px;height:28px}.icon-picker input{width:100%;background:#1f2937;color:white;border:1px solid #6366f1;border-radius:8px;padding:9px 11px;font:inherit;font-size:12px;box-sizing:border-box}.icon-picker-tabs{display:flex;gap:6px;margin-top:10px}.icon-picker-tabs button{flex:1;padding:8px;font-size:11px;font-weight:600}.icon-picker button[aria-pressed=true]{background:#312e81;color:#93c5fd}.icon-picker p{font-size:10px;color:#9ca3af;margin:8px 0}.icon-picker-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px}.icon-picker-grid button{display:grid;place-items:center;height:38px;min-width:0;padding:7px}.icon-picker-grid svg{width:20px;height:20px}.icon-picker button:hover{background:#374151}.icon-picker button:focus-visible{outline:2px solid #93c5fd}.icon-picker-more{display:block;margin:10px auto;font-size:11px;padding:8px 14px!important;background:#374151!important}@media(max-width:380px){.icon-picker-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+
+
+.icon-picker input:focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-color:#60a5fa}
+
+/* The picker is rendered inside the admin shell and follows its active theme. */
+.icon-picker{scrollbar-color:var(--admin-muted) var(--admin-surface);border-color:var(--admin-border);background:var(--admin-surface);color:var(--admin-text);box-shadow:0 24px 70px color-mix(in srgb,var(--admin-heading) 34%,transparent)}
+.icon-picker::backdrop{background:color-mix(in srgb,var(--admin-heading) 52%,transparent)}
+.icon-picker h2{color:var(--admin-heading)}
+.icon-picker input{border-color:var(--admin-accent);background:var(--admin-input-bg,var(--admin-surface));color:var(--admin-text)}
+.icon-picker button[aria-pressed=true]{background:color-mix(in srgb,var(--admin-primary) 18%,var(--admin-surface));color:var(--admin-primary)}
+.icon-picker p{color:var(--admin-muted)}
+.icon-picker button:hover,.icon-picker-more{background:var(--admin-button-secondary-bg)!important;color:var(--admin-button-secondary-text)}
+.icon-picker button:focus-visible,.icon-picker input:focus-visible{outline-color:var(--admin-accent);border-color:var(--admin-accent)}

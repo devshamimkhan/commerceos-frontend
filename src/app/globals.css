@@ -20,6 +20,7 @@ a { text-decoration: none; }
 .auth-container { width: 100%; max-width: 27rem; }
 .auth-brand { display: flex; gap: 12px; align-items: center; justify-content: center; color: #1e1b4b; margin-bottom: 20px; }
 .auth-brand-mark { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: 8px; background: linear-gradient(135deg,#7c3aed,#4f46e5); color: white; font-weight: 700; }
+.auth-brand-logo { width: 112px; height: 42px; object-fit: contain; }
 .auth-brand strong { display: block; font-size: 16px; line-height: 24px; }
 .auth-brand small { display: block; text-transform: uppercase; letter-spacing: 1.2px; font-size: 12px; font-weight: 600; color: #64748b; }
 .auth-card { border: 1px solid #ffffffe6; border-radius: 8px; background: #ffffffe0; box-shadow: 0 24px 70px #312e811f; backdrop-filter: blur(32px); padding: 24px; }
@@ -71,6 +72,7 @@ a { text-decoration: none; }
 .service-error { max-width: 420px; }
 .service-error h1 { font-size: 22px; font-weight: 700; color: #1e1b4b; }
 .service-error p { margin: 15px 0 24px; line-height: 24px; }
+.admin-orders-page tbody td:first-child > strong::before { content: "#"; }
 @media (max-width: 480px) {
   .auth-screen { padding: 24px 16px; }
   .auth-card { padding: 22px 20px; }

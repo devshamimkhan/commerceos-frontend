@@ -36,6 +36,7 @@ import {
 } from "@/lib/blogs-client";
 import MediaPickerModal from "@/components/media/media-picker";
 import { clearBlogListReturn, consumeBlogListReturn } from "@/lib/blog-navigation";
+import { parseBulkTagNames } from "@/lib/tag-input";
 import "react-quill-new/dist/quill.snow.css";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
@@ -179,6 +180,7 @@ export default function BlogEditorForm({ mode = "create", initialBlog = null }) 
   const [tagSearch, setTagSearch] = useState("");
   const [newCategoryName, setNewCategoryName] = useState("");
   const [newTagName, setNewTagName] = useState("");
+  const [isCreatingTags, setIsCreatingTags] = useState(false);
   const [editingCategoryId, setEditingCategoryId] = useState("");
   const [editingCategoryName, setEditingCategoryName] = useState("");
   const [editingTagId, setEditingTagId] = useState("");
@@ -313,21 +315,50 @@ export default function BlogEditorForm({ mode = "create", initialBlog = null }) 
   };
 
   const handleCreateTag = async () => {
-    const cleanName = newTagName.trim();
-    if (cleanName.length < 2) {
-      toast.error("Tag name must be at least 2 characters");
+    const names = parseBulkTagNames(newTagName);
+    if (!names.length || isCreatingTags) return;
+
+    const invalidName = names.find((name) => name.length < 2 || name.length > 100);
+    if (invalidName) {
+      toast.error(`Tag “${invalidName}” must be between 2 and 100 characters`);
       return;
     }
 
-    const res = await createBlogTag({ name: cleanName });
-    if (!res.success) {
-      toast.error(res.error || "Failed to create tag");
-      return;
+    setIsCreatingTags(true);
+    const nextTags = [...tags];
+    const selectedIds = [];
+    const failedNames = [];
+    let createdCount = 0;
+
+    for (const name of names) {
+      let tag = nextTags.find((item) => item.name.toLocaleLowerCase() === name.toLocaleLowerCase());
+      if (!tag) {
+        const res = await createBlogTag({ name });
+        if (!res.success) {
+          failedNames.push(name);
+          continue;
+        }
+        tag = res.data;
+        if (!nextTags.some((item) => item._id === tag._id)) nextTags.push(tag);
+        if (res.created !== false) createdCount += 1;
+      }
+      selectedIds.push(tag._id);
     }
 
-    toast.success("Tag created");
-    setNewTagName("");
-    await refreshTaxonomies();
+    setTags(nextTags);
+    setForm((current) => ({
+      ...current,
+      tags: [...new Set([...current.tags, ...selectedIds])],
+    }));
+    setNewTagName(failedNames.join(", "));
+    setIsCreatingTags(false);
+
+    if (selectedIds.length) {
+      toast.success(createdCount
+        ? `${createdCount} tag${createdCount === 1 ? "" : "s"} created and selected`
+        : "Tags selected");
+    }
+    if (failedNames.length) toast.error(`Could not create: ${failedNames.join(", ")}`);
   };
 
   const handleUpdateTag = async () => {
@@ -772,17 +803,28 @@ export default function BlogEditorForm({ mode = "create", initialBlog = null }) 
                 type="text"
                 value={newTagName}
                 onChange={(e) => setNewTagName(e.target.value)}
-                placeholder="New tag"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    void handleCreateTag();
+                  }
+                }}
+                placeholder="Add tags separated by commas"
                 className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm"
               />
               <button
                 type="button"
-                onClick={handleCreateTag}
+                onClick={() => void handleCreateTag()}
+                disabled={!newTagName.trim() || isCreatingTags}
+                aria-label="Create and select tags"
                 className="bg-rose-gold px-3 rounded-lg text-sm"
               >
-                <FaPlus />
+                {isCreatingTags ? <FaSpinner className="animate-spin" /> : <FaPlus />}
               </button>
             </div>
+            <p className="mt-2 text-xs text-gray-500">
+              Separate multiple tags with commas, for example: news, global, world
+            </p>
 
             {editingTagId ? (
               <div className="mt-3 flex gap-2">
