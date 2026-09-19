@@ -52,4 +52,4 @@ export const DEFAULT_ADMIN_THEME: AdminThemeSettings = {
   adminFaviconUrl: '',
 };
 
-export const ADMIN_THEME_UPDATED_EVENT = 'commercexlab:admin-theme-updated';
+export const ADMIN_THEME_UPDATED_EVENT = 'sportsshop:admin-theme-updated';

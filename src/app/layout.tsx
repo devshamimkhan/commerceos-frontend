@@ -4,9 +4,9 @@ import '@fontsource-variable/noto-sans-bengali';
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CommerceXLab | Admin Workspace",
+  title: "SportsShop | Admin Workspace",
   description: "Unified online, retail and wholesale commerce workspace.",
-  icons: { icon: "/branding/commercexlab-icon.png" },
+  icons: { icon: "/branding/sportsshop-icon.webp" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

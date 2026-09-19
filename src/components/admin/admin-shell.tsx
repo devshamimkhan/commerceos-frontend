@@ -180,7 +180,7 @@ export function AdminShell({ user, initialTheme, children }: { user: AuthUser; i
               <LuMenu />
             </button>
             <div>
-              <span>CommerceXLab Admin</span>
+              <span>SportsShop Admin</span>
               <h1>{pageTitle}</h1>
             </div>
           </div>

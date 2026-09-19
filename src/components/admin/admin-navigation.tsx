@@ -95,10 +95,10 @@ export function AdminNavigation({ logoUrl = '', faviconUrl = '' }: { logoUrl?: s
 
   return <>
     <div className={`sidebar-header${logoUrl ? " has-custom-logo" : ""}`}>
-      <Link href="/admin/dashboard" className={`sidebar-brand-link${logoUrl ? " has-custom-logo" : ""}`} aria-label="CommerceXLab dashboard">
-        <NextImage unoptimized src={logoUrl || "/branding/commercexlab-logo.png"} alt="CommerceXLab" width={720} height={310} className="sidebar-brand-logo sidebar-brand-logo-wide" priority />
-        <NextImage unoptimized src={faviconUrl || "/branding/commercexlab-icon.png"} alt="" width={1254} height={1254} className="sidebar-brand-logo sidebar-brand-logo-icon" aria-hidden="true" />
-        {!logoUrl && <span className="sidebar-brand-title">CommerceXLab</span>}
+      <Link href="/admin/dashboard" className={`sidebar-brand-link${logoUrl ? " has-custom-logo" : ""}`} aria-label="SportsShop dashboard">
+        <NextImage unoptimized src={logoUrl || "/branding/sportsshop-logo.webp"} alt="SportsShop" width={720} height={310} className="sidebar-brand-logo sidebar-brand-logo-wide" priority />
+        <NextImage unoptimized src={faviconUrl || "/branding/sportsshop-icon.webp"} alt="" width={1254} height={1254} className="sidebar-brand-logo sidebar-brand-logo-icon" aria-hidden="true" />
+        {!logoUrl && <span className="sidebar-brand-title">SportsShop</span>}
       </Link>
     </div>
     <nav className="sidebar-nav">{sections.map(section => <div key={section.label}><p className="sidebar-section-label">{section.label}</p>{section.items.map(item => <NavigationItem key={item.label} item={item} pendingOrderCount={pendingOrderCount} pendingReviewCount={pendingReviewCount} />)}</div>)}</nav>

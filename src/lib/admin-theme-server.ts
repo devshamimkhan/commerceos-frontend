@@ -8,8 +8,8 @@ export interface AdminBranding {
 }
 
 export const DEFAULT_ADMIN_BRANDING: AdminBranding = {
-  adminLogoUrl: '/branding/commercexlab-logo.png',
-  adminFaviconUrl: '/branding/commercexlab-icon.png',
+  adminLogoUrl: '/branding/sportsshop-logo.webp',
+  adminFaviconUrl: '/branding/sportsshop-icon.webp',
 };
 
 export async function getPublicAdminBranding(): Promise<AdminBranding> {

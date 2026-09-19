@@ -4,6 +4,6 @@ import { getPublicAdminBranding } from '@/lib/admin-theme-server';
 
 export async function generateMetadata(): Promise<Metadata> {
   const branding = await getPublicAdminBranding();
-  return { title: 'Sign in | CommerceXLab', icons: { icon: branding.adminFaviconUrl } };
+  return { title: 'Sign in | SportsShop', icons: { icon: branding.adminFaviconUrl } };
 }
 export default function LoginPage() { return <AuthForm />; }

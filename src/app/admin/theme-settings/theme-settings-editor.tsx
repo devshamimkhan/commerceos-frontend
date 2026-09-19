@@ -110,7 +110,7 @@ export function ThemeSettingsEditor({ initialTheme }: { initialTheme: AdminTheme
     <section className="theme-settings-page">
       <header className="theme-settings-heading">
         <div className="theme-settings-heading-icon"><Palette aria-hidden="true" /></div>
-        <div><h2>Theme Settings</h2><p>Manage the CommerceXLab admin palette from one central module.</p></div>
+        <div><h2>Theme Settings</h2><p>Manage the SportsShop admin palette from one central module.</p></div>
       </header>
 
       <div className="theme-settings-layout">
@@ -165,7 +165,7 @@ export function ThemeSettingsEditor({ initialTheme }: { initialTheme: AdminTheme
           <span className="theme-preview-eyebrow">Live preview</span>
           <div className="theme-preview-window">
             <div className="theme-preview-sidebar"><span /><span /><span /></div>
-            <div className="theme-preview-content"><h3>CommerceXLab</h3><p>Central admin theme</p><div className="theme-preview-panels"><span /><span /></div><button type="button">Primary action</button></div>
+            <div className="theme-preview-content"><h3>SportsShop</h3><p>Central admin theme</p><div className="theme-preview-panels"><span /><span /></div><button type="button">Primary action</button></div>
           </div>
           <p>Preview changes here, then save to apply them across the admin panel.</p>
         </aside>

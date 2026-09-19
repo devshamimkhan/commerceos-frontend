@@ -1,4 +1,4 @@
-# CommerceXLab Admin Frontend
+# SportsShop Admin Frontend
 
 Next.js App Router + TypeScript + Tailwind CSS.
 
